@@ -1,0 +1,58 @@
+def teleop_main():
+    if Gamepad.get_value("joystick_right_y") > 0.5:
+        Robot.set_value(left_motor, "duty_cycle", -1.0)
+        Robot.set_value(right_motor, "duty_cycle", -1.0)
+    else:
+        Robot.set_value(left_motor, "duty_cycle", 0)
+        Robot.set_value(right_motor, "duty_cycle", 0)
+
+    if Gamepads.get_value("button_a"):
+        Robot.run(windup)
+async def windup():
+    Robot.set_value(spool_motor, "duty_cycle", 1.0)
+  
+    Robot.set_value(spool_motor, "duty_cycle", 0.0)
+await Actions.sleep(1.0)async def windup():
+    Robot.set_value(spool_motor, "duty_cycle", 1.0)
+    await Actions.sleep(1.0)
+    Robot.set_value(spool_motor, "duty_cycle", 0.0)
+
+def teleop_setup():
+    pass
+
+def teleop_main():
+    if Gamepad.get_value("joystick_right_y") > 0.5:
+        Robot.set_value(left_motor, "duty_cycle", -1.0)
+        Robot.set_value(right_motor, "duty_cycle", -1.0)
+    else:
+        Robot.set_value(left_motor, "duty_cycle", 0)
+        Robot.set_value(right_motor, "duty_cycle", 0)
+
+    if Gamepads.get_value("button_a"):
+        Robot.run(windup)
+def autonomous_setup():
+    Robot.run(open_loop_drive)
+
+def autonomous_main():
+    pass
+
+async def open_loop_drive():
+    
+    Robot.set_value(left_motor, "duty_cycle", 1.0)
+    Robot.set_value(right_motor, "duty_cycle", 1.0)
+    await Actions.sleep(1.0)
+
+   
+    Robot.set_value(left_motor, "duty_cycle", 0.5)
+    Robot.set_value(right_motor, "duty_cycle", -0.5)
+    await Actions.sleep(0.5)
+
+  
+    Robot.set_value(left_motor, "duty_cycle", 1.0)
+    Robot.set_value(right_motor, "duty_cycle", 1.0)
+    await Actions.sleep(0.5)
+
+   
+    Robot.set_value(left_motor, "duty_cycle", 0.0)
+    Robot.set_value(right_motor, "duty_cycle", 0.0)
+
